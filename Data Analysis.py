@@ -1,0 +1,26 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+data = pd.read_csv('pseudo_facebook.csv')
+summary_stats = data.describe()
+data_info = data.info()
+plt.figure(figsize=(12, 6))
+sns.heatmap(data.isnull(), cbar=False, cmap='viridis')
+plt.title('Missing Data')
+plt.show()
+data.hist(bins=20, figsize=(12, 10))
+plt.suptitle('Histograms of Numerical Variables', y=1.02)
+plt.show()
+plt.figure(figsize=(12, 6))
+sns.boxplot(data=data, orient='h')
+plt.title('Box Plots')
+plt.show()
+correlation_matrix = data.corr()
+plt.figure(figsize=(12, 8))
+sns.heatmap(correlation_matrix, annot=True, cmap='coolwarm')
+plt.title('Correlation Matrix')
+plt.show()
+sns.pairplot(data, diag_kind='kde', height=2.5)
+plt.suptitle('Pairplot', y=1.02)
+plt.show()
